@@ -23,7 +23,7 @@ def run():
 	#for anchor in pastebing_archive.findAll('a')[15:523:2]:
 
 	#iterates through 44 pastes instead of all as seen above
-	for anchor in pastebin_archive.findAll('a')[17:522:2]:
+	for anchor in pastebin_archive.findAll('a')[16:523:2]:
 		#url of archived post
 		try:
 			new_url = "http://freeproxyx.appspot.com/" + (re.search(r'(?<=href="/).*(?=")', str(anchor)).group())
@@ -36,12 +36,15 @@ def run():
 				if re.search("password", str(recent_paste_content)) != None and re.search("porn" , str(recent_paste_content)) == None:
 					OUTPUT["password"].append(new_url + "\n")
 					#lets you know as it's captured
-					#print new_url + ' the before mentioned url mentions "password"'
+					print new_url + ' the before mentioned url mentions "password"'
 				elif re.search("secret", str(recent_paste_content)) != None and re.search("porn", str(recent_paste_content)) == None:
 					OUTPUT["secret"].append(new_url + "\n")
 				elif re.search("account", str(recent_paste_content)) != None and re.search("porn", str(recent_paste_content)) == None:
 					OUTPUT["accounts"].append(new_url + "\n")
-					#print new_url + ' the before mentioned url mentions "secret"'
+					print new_url + ' the before mentioned url mentions "secret"'
+				elif re.search("netflix", str(recent_paste_content)) != None:
+					OUTPUT["accounts"].append(new_url + "\n")
+					print "NETFLIX"
 			COUNT += 1
 			print "Scraped " + str(COUNT) + " pastes so far"
 		except:
